@@ -2,7 +2,7 @@ package com.company;
 
 public class Envio {
 
-    private Cliente clienteEnvio; // pasarle cliente o solo el nombre y validar si existe?
+    private Cliente clienteEnvio;
     private Producto productoEnvio;
     private int cantidadKm;
     private static double costoKm;

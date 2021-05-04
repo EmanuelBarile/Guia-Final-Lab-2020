@@ -1,14 +1,17 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+
 public class Main {
 
-    final  static int dimension =20;
 
     public static void main(String[] args) {
 
-        Cliente listaClientes[]= new Cliente[dimension];
-        Producto listaProductos[]= new Producto[dimension];
-        Envio listaEnvios[]= new Envio[dimension];
+        ArrayList<Cliente> listaClientes= new ArrayList<>();
+        ArrayList<Producto> listaProductos= new ArrayList<>();
+        ArrayList listaEnvios= new ArrayList<>();
 
         Distribuidora distribuidoraUnica= new Distribuidora(listaClientes,listaProductos,listaEnvios);
 
@@ -31,11 +34,15 @@ public class Main {
         distribuidoraUnica.realizarUnEnvio("Lucia","Cubetera",11);
         distribuidoraUnica.realizarUnEnvio("Jose","Billetera",15);
         distribuidoraUnica.realizarUnEnvio("Lucia","Billetera",65);
+        distribuidoraUnica.realizarUnEnvio("Lucia","Llavero",112);
+        distribuidoraUnica.realizarUnEnvio("Jose","Destapador",44);
 
         imprimirEnvios(distribuidoraUnica);
         imprimirProductos(distribuidoraUnica);
 
         System.out.println("el promedio total de vendidos es: "+ promedioDeTotalVendido(distribuidoraUnica));
+        imprimirClienteConMasCompras(distribuidoraUnica);
+
     }
 
 
@@ -66,23 +73,37 @@ public class Main {
         }
     }
 
+    //4) Realizar 5 ventas por consola y mostrar el promedio de totales vendidos (costo
+    //del producto + envío).
+
     public static double promedioDeTotalVendido(Distribuidora distribuidora){
 
         double promedioTotal=0;
-        int cont=0; // se soluciona usando ArrayList en vez de Array comun
         for (Envio envio : distribuidora.getListaEnvios() ) {
             if(envio !=null){
                 promedioTotal+= Envio.calcularCostoTotal(envio.getClienteEnvio(), envio.getProductoEnvio(), envio.getCantidadKm());
-                cont++;
             }
-
         }
-        return promedioTotal / cont;
+        return promedioTotal / distribuidora.getListaEnvios().size();
     }
 
-    public static void ImprimirClienteConMasCompras(Distribuidora distribuidora){
+    //5) Indicar por consola, quien fue el cliente que más compras realizó y mostrar sus
+    //atributos
 
-        // realizar y ver diferencias usando arraylist
+    public static void imprimirClienteConMasCompras(Distribuidora distribuidora){
+
+        int contador=0;
+        int frecuencia=0;
+        int indice=-1;
+        for (Envio clienteEnvio  : distribuidora.getListaEnvios() ) {
+            frecuencia= Collections.frequency(distribuidora.getListaEnvios(),clienteEnvio);
+            System.out.println("la frecuencia es: "+frecuencia);
+            if (contador <= frecuencia ){
+                contador=frecuencia;
+                indice= distribuidora.getListaEnvios().indexOf(clienteEnvio);
+            }
+        }
+        System.out.println("Cliente con mayor cantidad de compras es: "+ distribuidora.getListaClientes().get(indice));
     }
 
 }

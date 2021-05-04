@@ -1,15 +1,16 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Distribuidora {
 
-    private Cliente listaClientes [];
-    private Producto listaProductos[];
-    private Envio listaEnvios [];
+    private ArrayList<Cliente> listaClientes = new ArrayList<>();
+    private ArrayList<Producto> listaProductos = new ArrayList<>();
+    private ArrayList<Envio> listaEnvios = new ArrayList<>();
 
     //Constructor
-    public Distribuidora (Cliente listaClientes[], Producto listaProductos[], Envio listaEnvios[]){
+    public Distribuidora (ArrayList<Cliente> listaClientes, ArrayList<Producto> listaProductos, ArrayList<Envio> listaEnvios){
 
         this.listaClientes=listaClientes;
         this.listaProductos=listaProductos;
@@ -21,36 +22,19 @@ public class Distribuidora {
     public void  insertarCliente (String nombre, String direccion, int telefono, boolean isMayorista){
 
         Cliente cliente = new Cliente(nombre, direccion, telefono, isMayorista);
-        for (int i=0; i< listaClientes.length; i++){
-            if (listaClientes[i] == null){
-                listaClientes[i]=cliente;
-                break;
-            }
-        }
+        listaClientes.add(cliente);
     }
 
     public void insertarProducto(String nombre, double precio, int stock){
 
         Producto producto = new Producto(nombre, precio, stock);
-        for (int i=0; i< listaProductos.length; i++){
-            if (listaProductos[i]== null){      //inserta en el primer sub-indice disponible
-                listaProductos[i] = producto;
-                break;
-            }
-        }
+        listaProductos.add(producto);
 
     }
 
     public void insertarEnvio(Producto producto, Cliente cliente, int cantidadKm){
         Envio envio =new Envio(cliente,producto,cantidadKm);
-        for (int i=0; i< listaEnvios.length; i++){
-
-            if (listaEnvios[i]==null){
-                listaEnvios[i]= envio;
-                break;
-            }
-        }
-
+        listaEnvios.add(envio);
 
     }
 
@@ -101,25 +85,21 @@ public class Distribuidora {
     @Override
     public String toString() {
         return "Distribuidora{" +
-                "listaClientes=" + Arrays.toString(listaClientes) +
-                ", listaProductos=" + Arrays.toString(listaProductos) +
-                ", listaEnvios=" + Arrays.toString(listaEnvios) +
+                "listaClientes=" + listaClientes +
+                ", listaProductos=" + listaProductos +
+                ", listaEnvios=" + listaEnvios +
                 '}';
     }
 
-    public Cliente[] getListaClientes() {
+    public ArrayList<Cliente> getListaClientes() {
         return listaClientes;
     }
 
-    public Producto[] getListaProductos() {
+    public ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }
 
-    public Envio[] getListaEnvios() {
+    public ArrayList<Envio> getListaEnvios() {
         return listaEnvios;
     }
-
-
-
-
 }
