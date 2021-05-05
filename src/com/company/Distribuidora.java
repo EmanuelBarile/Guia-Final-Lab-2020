@@ -10,11 +10,13 @@ public class Distribuidora {
     private ArrayList<Envio> listaEnvios = new ArrayList<>();
 
     //Constructor
-    public Distribuidora (ArrayList<Cliente> listaClientes, ArrayList<Producto> listaProductos, ArrayList<Envio> listaEnvios){
 
-        this.listaClientes=listaClientes;
-        this.listaProductos=listaProductos;
-        this.listaEnvios=listaEnvios;
+
+    public Distribuidora (){
+
+        this.listaClientes=new ArrayList<>();
+        this.listaProductos=new ArrayList<>();
+        this.listaEnvios=new ArrayList<>();
 
     }
 

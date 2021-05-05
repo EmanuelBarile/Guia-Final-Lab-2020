@@ -9,11 +9,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<Cliente> listaClientes= new ArrayList<>();
-        ArrayList<Producto> listaProductos= new ArrayList<>();
-        ArrayList listaEnvios= new ArrayList<>();
 
-        Distribuidora distribuidoraUnica= new Distribuidora(listaClientes,listaProductos,listaEnvios);
+        Distribuidora distribuidoraUnica= new Distribuidora();
+
 
         //carga de datos
 
