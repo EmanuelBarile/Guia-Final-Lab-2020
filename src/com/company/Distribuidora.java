@@ -61,7 +61,7 @@ public class Distribuidora {
 
 
 
-    //envio es la operacion que engloba a las demas clases, aca preciso validar tanto cliente
+    //Envio es la operacion que engloba a las demas clases, aca preciso validar tanto cliente
     // como producto y luego ingreso el envio a mi lista de envios
 
     public void realizarUnEnvio (String nombreCliente, String nombreProducto, int cantidadKm){

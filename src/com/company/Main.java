@@ -36,6 +36,8 @@ public class Main {
         distribuidoraUnica.realizarUnEnvio("Lucia","Billetera",65);
         distribuidoraUnica.realizarUnEnvio("Lucia","Llavero",112);
         distribuidoraUnica.realizarUnEnvio("Jose","Destapador",44);
+        distribuidoraUnica.realizarUnEnvio("Jose","Destapador",28);
+        distribuidoraUnica.realizarUnEnvio("Jose","Llavero",77);
 
         imprimirEnvios(distribuidoraUnica);
         imprimirProductos(distribuidoraUnica);
@@ -92,18 +94,30 @@ public class Main {
 
     public static void imprimirClienteConMasCompras(Distribuidora distribuidora){
 
-        int contador=0;
-        int frecuencia=0;
-        int indice=-1;
-        for (Envio clienteEnvio  : distribuidora.getListaEnvios() ) {
-            frecuencia= Collections.frequency(distribuidora.getListaEnvios(),clienteEnvio);
-            System.out.println("la frecuencia es: "+frecuencia);
-            if (contador <= frecuencia ){
-                contador=frecuencia;
-                indice= distribuidora.getListaEnvios().indexOf(clienteEnvio);
+        int contador=0;     // guardo las frecuencias al terminar cada ronda
+        int frecuencia=0;   // cuento las frecuencias de cada cliente
+        int indice=-1;      // -1 para marcar el primer sub indice en 0
+        int j=0;
+
+        for (int i=0; i<distribuidora.getListaClientes().size(); i++){
+            Cliente cliente= distribuidora.getListaClientes().get(i); // guardo el cliente de primer sub indice
+
+            for (j=0; j<distribuidora.getListaEnvios().size();j++){
+                if (cliente.equals(distribuidora.getListaEnvios().get(j).getClienteEnvio()) ){ // lo comparo con el cliente de la lista de envios
+                    frecuencia++; // acumulo frecuencia de coincidencias
+                }
+
+            }
+            j=0; // reseteo j para recorrer la listaEnvios desde el principio en la proxima vuelta
+            if (frecuencia>contador){   //si la frecuencia de la reciente vuelta es mayor a contador hago los reemplazos
+                indice++;               // guardo el indice del cliente con mayor cantidad de compras
+                contador=frecuencia;    // guardo las frecuencias en contador
+                frecuencia=0;           // reseteo frecuencias
             }
         }
+
         System.out.println("Cliente con mayor cantidad de compras es: "+ distribuidora.getListaClientes().get(indice));
+        System.out.println("con un total de ventas igual a :"+contador );
     }
 
 }
